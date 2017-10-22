@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Autrorization test suite">
+    <parameter name="login" value="ssomkov@gmail.com"/>
+    <parameter name="password" value="123456"/>
+    <parameter name="url" value="http://way2automation.com/"/>
+    <parameter name="coursesUrl" value="http://courses.way2automation.com/"/>
+
+    <test name="Cookies test">
+        <classes>
+            <class name="tests.AuthorizationTest">
+            </class>
+        </classes>
+    </test>
+</suite>
+
