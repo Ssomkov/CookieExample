@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AuthorizationTest {
 
-    private WebDriver driver;
+    private static WebDriver driver;
     private MainPage mainPage = new MainPage();
     private AuthorizationPage authorizationPage = new AuthorizationPage();
     private CoursesPage coursesPage = new CoursesPage();
@@ -48,21 +48,15 @@ public class AuthorizationTest {
         authorizationPage.init(driver);
         authorizationPage.login(login, password);
         coursesPage.init(driver);
-        CookiesHolder cookiesHolder = new CookiesHolder();
-        cookiesHolder.saveCookies(driver);
+        CookiesHolder.saveCookies(driver);
         Assert.assertTrue(coursesPage.isPageOpened());
     }
 
     @Test(enabled = false)
     @Parameters("coursesUrl")
     public void cookieAuthorization(String coursesUrl) throws InterruptedException {
-        CookiesHolder cookiesHolder = new CookiesHolder();
-        Set<Cookie> cookieSet = cookiesHolder.loadCookies();
-        for (Cookie cookie : cookieSet) {
-            driver.manage().addCookie(cookie);
-        }
-        driver.navigate().refresh();
-        driver.navigate().to(coursesUrl);
+        CookiesHolder.loadCookies(driver);
+        driver.get(coursesUrl);
         coursesPage.init(driver);
         Assert.assertTrue(coursesPage.isPageOpened());
     }
