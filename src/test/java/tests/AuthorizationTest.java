@@ -61,6 +61,7 @@ public class AuthorizationTest {
         for (Cookie cookie : cookieSet) {
             driver.manage().addCookie(cookie);
         }
+        driver.navigate().refresh();
         driver.navigate().to(coursesUrl);
         coursesPage.init(driver);
         Assert.assertTrue(coursesPage.isPageOpened());
@@ -68,6 +69,6 @@ public class AuthorizationTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 }
