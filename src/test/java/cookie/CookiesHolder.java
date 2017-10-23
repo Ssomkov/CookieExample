@@ -1,5 +1,7 @@
 package cookie;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
@@ -30,8 +32,9 @@ public class CookiesHolder {
         }
     }
 
-    public Cookie loadCookies() {
+    public Set<Cookie> loadCookies() {
         Cookie cookie = new Cookie("", "");
+        Set<Cookie> cookieSet = new HashSet<Cookie>();
         try {
             File file = new File("browser.dat");
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -52,12 +55,13 @@ public class CookiesHolder {
                     }
                     boolean isSecure = new Boolean(str.nextToken()).booleanValue();
                     cookie = new Cookie(name, value, domain, path, expiry, isSecure);
+                    cookieSet.add(cookie);
                     count++;
                 }
             }
         } catch (Exception ex) {
             System.out.println("Ошибка при чтении куки - " + ex.getLocalizedMessage());
         }
-        return cookie;
+        return cookieSet;
     }
 }

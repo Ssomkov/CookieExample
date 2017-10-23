@@ -24,6 +24,7 @@ public class MainPage {
     public void init(WebDriver driver) {
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, 15).withMessage("Элемент не найден");
+        driver.manage().window().maximize();
     }
 
     private void clickMemberLoginButton() {

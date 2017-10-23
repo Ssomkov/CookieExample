@@ -1,6 +1,8 @@
 package tests;
 
 import cookie.CookiesHolder;
+import java.util.Set;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -55,7 +57,10 @@ public class AuthorizationTest {
     @Parameters("coursesUrl")
     public void cookieAuthorization(String coursesUrl) throws InterruptedException {
         CookiesHolder cookiesHolder = new CookiesHolder();
-        driver.manage().addCookie(cookiesHolder.loadCookies());
+        Set<Cookie> cookieSet = cookiesHolder.loadCookies();
+        for (Cookie cookie : cookieSet) {
+            driver.manage().addCookie(cookie);
+        }
         driver.navigate().to(coursesUrl);
         coursesPage.init(driver);
         Assert.assertTrue(coursesPage.isPageOpened());
@@ -63,6 +68,6 @@ public class AuthorizationTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        //driver.quit();
     }
 }
