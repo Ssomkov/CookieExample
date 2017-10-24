@@ -1,8 +1,9 @@
 package tests;
 
 import cookie.CookiesHolder;
-import java.util.Set;
-import org.openqa.selenium.Cookie;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -14,10 +15,6 @@ import org.testng.annotations.Test;
 import pages.AuthorizationPage;
 import pages.CoursesPage;
 import pages.MainPage;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by ssomkov on 20.10.2017.
@@ -52,11 +49,11 @@ public class AuthorizationTest {
         Assert.assertTrue(coursesPage.isPageOpened());
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     @Parameters("coursesUrl")
     public void cookieAuthorization(String coursesUrl) throws InterruptedException {
-        CookiesHolder.loadCookies(driver);
         driver.get(coursesUrl);
+        CookiesHolder.loadCookies(driver);
         coursesPage.init(driver);
         Assert.assertTrue(coursesPage.isPageOpened());
     }

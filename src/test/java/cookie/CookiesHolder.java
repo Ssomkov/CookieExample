@@ -30,7 +30,7 @@ public class CookiesHolder {
                     cookieName = " ";
                 }
                 if (cookieValue.equals("")) {
-                    cookieValue = " ";
+                    cookieValue = "value";
                 }
                 if (cookieDomain.equals("")) {
                     cookieDomain = " ";
